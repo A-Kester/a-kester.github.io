@@ -1,0 +1,34 @@
+{
+    "name": "doughbot",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "clean": "rimraf src/.observablehq/cache",
+        "build": "observable build",
+        "dev": "observable preview",
+        "deploy": "observable deploy",
+        "observable": "observable"
+      },
+    "keywords": [],
+    "contributors": [
+    "Anna Kester <akester@middlebury.edu>",
+    "Grayson Wade <gdwade@middlebury.edu>"
+    ],
+    "license": "Apache-2.0",
+    "dependencies": {
+		"@observablehq/framework": "^1.13.3"
+	},
+    "pnpm": {
+      "onlyBuiltDependencies": [
+        "esbuild"
+      ]
+    },
+    "devDependencies": {
+      "@testing-library/dom": "^10.4.1",
+      "@testing-library/jest-dom": "^6.7.0",
+      "d3-dsv": "^3.0.1",
+      "rimraf": "^6.0.1",
+      "vitest": "^3.2.4"
+    }
+  }
