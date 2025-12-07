@@ -2,4 +2,27 @@
     display: flex;
     gap: 60px;
   }
-  
+
+h2 {
+font-size: 1.4rem;
+font-weight: 600;
+margin-top: 2rem;
+margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: #555;
+    font-style: italic;
+}
+
+p {
+    max-width: 90%;
+    text-align: justify;
+}
+
+p.footnote {
+    text-align: left;
+}
