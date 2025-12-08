@@ -164,8 +164,6 @@ void loop() {
       state = 2;
       break;
   }
-  
-  
   // Bad blocking debounce (works pretty well)
   delay(350);
 }
