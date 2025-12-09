@@ -26,7 +26,9 @@
     <b>LiquidCrystal</b><br>This built-in library handles communication and writing to the LCD.<br>
     <b>math</b><br>This library is also built-in to handle our volume computations using pi.<br></p>
     <h4>Code Logic</h4>
+    <p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]</p>
     <h4>User Interface</h4>
+    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Using the buttons to navigate the menu display, users can view [...] pages which display [...] information. To start the measurement process the user executes the following steps:</p>
     <h4>BOM</h4>
     <table style="margin-left: 40px;">
         <tr style="font-weight: bold;">
@@ -105,11 +107,19 @@
             <td> </td>
         </tr>
     </table>
+    <p style="margin-left: 40px;"><b>3D Printed Components</b></p>
+    <div class="parts">
+        <img src="/images/img_4825.jpeg" alt="centering mechanism" width="375" height="450">
+        <img src="/images/img_4955.jpeg" alt="feet" width="500" height="375">
+    </div>
 </div>
 
 ## Result
 
-## Accesibility
+## Accessibility
+<div id="accessibility">
+    <p>Using our device requires the ability to adjust the stand and centering mechanism around the bowl, push buttons, and read the display. This current design may be difficult for people with limited use of their hands or vision problems.<br>To make our ES more accessible we are working to transmit the data displayed on the LCD to a web server where users can then use a screen reader to receive updates on the status of their dough. Other changes we could implement in the future to improve accessibility include designing a more simple case / stand for the device to be housed in and then attached to the user's bowl. 
+</div>
 
 ## Ethical Implications
 
@@ -121,11 +131,11 @@
         <table>
             <tr>
                 <td>Oct. 24th</td>
-                <td>Proposal Due
+                <td>Proposal Due<br>
                     <ul>
                         <li>Finalize materials</li>
                         <li>Find drivers for sensors</li>
-                        <li>Finalize functional design</li>
+                        <li>Finalize device design</li>
                     </ul>
                 </td>
             </tr>
@@ -133,10 +143,8 @@
                 <td>Week of Nov 3rd</td>
                 <td>
                     <ul>
-                        <li>Parts arrive?</li>
-                        <li>Have software drivers ready to go</li>
-                        <li>Test components (individual)</li>
-                        <li>Rough stand design</li>
+                        <li>Connect sensors and read data</li>
+                        <li>Start writing bowl scanning logic</li>
                     </ul>
                 </td>
             </tr>
@@ -144,8 +152,9 @@
                 <td>Week of Nov 10th</td>
                 <td>
                     <ul>
+                        <li>Motor assembly</li>
                         <li>Integrate sensors</li>
-                        <li>Write code?</li>
+                        <li>Make adjustments to 3D prints</li>
                     </ul>
                 </td>
             </tr>
@@ -153,18 +162,17 @@
                 <td>Week of Nov 17th</td>
                 <td>
                     <ul>
-                        <li>Integrate stand</li>
+                        <li>Measure volume</li>
+                        <li>Assemble stand</li>
                     </ul>
                 </td>
             </tr>
             <tr>
                 <td>Week of Nov 24th (Thanksgiving)</td>
-                <td>NO HARDWARE
+                <td>
                     <ul>
-                        <li>Bug fixes</li>
-                        <li>WDT?</li>
-                        <li>Wireless?</li>
-                        <li>Optional software feature</li>
+                        <li>User interface implementation</li>
+                        <li>Optional software feature / dough prediction</li>
                     </ul>
                 </td>
             </tr>
@@ -232,7 +240,7 @@
             </tr>
             <tr>
                 <td>Week of Nov 24th (Thanksgiving)</td>
-                <td>NO HARDWARE
+                <td>
                     <ul>
                         <li>Wrote volume calculation code</li>
                     </ul>
