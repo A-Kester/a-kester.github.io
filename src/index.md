@@ -30,9 +30,7 @@
     <b>math</b><br>This library is also built-in to handle our volume computations using pi.<br></p>
     <h4>Code Logic</h4>
     <h5>Header files</h5>
-    <p style="margin-left: 40px;">
-     Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
-    </p>
+    <p style="margin-left: 40px;">Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.</p>
     <h5>State Machine</h5>
     <div class="imgs">
         <img src="images/state_machine.png" alt="flow chart of Doughbot state machine" width="600" height="475">
