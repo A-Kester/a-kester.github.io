@@ -8,6 +8,8 @@
 
 #define MAX_TURNS 36
 #define STEP_MM 3
+#define TEN_MIN_MS 600000
+#define ONE_MIN_MS 60000
 // Setp size = 3mm
 
 
@@ -23,10 +25,11 @@ uint8_t editing_rise_factor = 0;
 uint8_t editing_scan_freq = 0;
 uint8_t state = 2;
 uint8_t prev_state = 2;
+uint8_t progress = 0;
 
 uint8_t val_array_len = 0;
 uint32_t bowl_area = 846333;
-uint32_t last_dough_area = 0;
+uint32_t dough_area = 0;
 uint32_t init_dough_area = 0;
 
 
@@ -66,6 +69,7 @@ void loop() {
   //struct temp_humid th_struct;
   //get_temp_humid(&th_struct);
   unsigned long curr;
+  uint8_t scan_freq = 0;
   switch (state) {
     case 0:
       // Loading:
@@ -128,8 +132,10 @@ void loop() {
       if (has_been_pressed(B_START)) {
         prev_state = state;
         // ********** UNCOMMENT LINE BELLOW *************
-        //init_dough_area = scan_bowl();
-        Serial.println(((settings & (1 << (7-settings_index))) != 0));
+        //init_dough_area = bowl_area - scan_bowl();
+        init_dough_area = bowl_area - 838620;
+        // ********** REMOVE LINE ABOVE  *************
+        progress = 0;
         start_time = millis();
         state = 4;
       } else if (has_been_pressed(B_SWAP)) {
@@ -140,20 +146,29 @@ void loop() {
       break;
     case 4:
       curr = millis();
-      
       // TEMP
       // 5 is the index for the time vs vol check
       if ((settings & (1 << 5)) != 0) {
         // Using volume rise
-        Serial.println("VOL");
+        scan_freq = ascii_to_int(*s_freq);
+        //if ((curr - start_time) >= (ONE_MIN_MS * scan_freq) ) {
+          //dough_area = bowl_area - scan_bowl();
+          dough_area = bowl_area - 700388;
+          progress = (dough_area* 10) / (2 * init_dough_area);
+          start_time = curr;
+          if (progress >= 100) {
+            state = 2;
+          }
+        //}
       } else {
-        Serial.print("checking time: "); Serial.print(curr - start_time); Serial.print(" / "); Serial.println(target_time);
+        //Serial.print("checking time: "); Serial.print(curr - start_time); Serial.print(" / "); Serial.println(target_time);
+        progress = ((curr - start_time) * 10)/target_time;
         if ((curr - start_time) >= target_time) {
           // time has expired
-          state = 5;
+          state = 2;
         }
       }
-      display_rise_progress(0);
+      display_rise_progress(progress);
       break;
     case 5:
       Serial.println("Timer expired");
