@@ -34,6 +34,7 @@
      Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
     </p>
     <h5>State Machine</h5>
+    <img src="images/state_machine.png" alt="flow chart of Doughbot state machine" width="475" height="550">
     <p>
         The doughbot state machine is comprised of 5 states. States 1-4 are typical display states which help control the flow of the program. Each display state starts with a call to one of the display functions, followed by button handling logic. State 5 is a partially implemented finish state which simply prints to the console before returning to the home state (state 2).State 0 was reserved for a loading screen which has not been implemented. While slightly counter-intuative, the initial state is state 2 since state 1 is used for the settings. This is meant to make the logic a bit cleaner and be in line with the idea of not being able to go back a state, other than to reach the settings menu. The following is a detailed description of each state:
         <ol>
