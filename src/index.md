@@ -30,15 +30,14 @@
     <b>math</b><br>This library is also built-in to handle our volume computations using pi.<br></p>
     <h4>Code Logic</h4>
     <h5>Header files</h5>
-    <p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]
+<p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]
      Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific library. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
-    </p>
+</p>
     <h5>State Machine</h5>
     <p>Explain state machine (im still cleaning it up!)</p>
     <h4>User Interface</h4>
-    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Starting from the users far left, the red button allows the user to access the system settings. Pressing the button again will return the user to their last screen. The settings are only accessable before a rise has been started. In the settings menu, the user can toggle the wireless connection*, alerts*, the elapsed rise time, a rise progress bar, and select timed or volume based rise, desired rise time**, target rise volume**, and scan frequency in multiples of 10 minutes** ('*' denotes incomplete options, '**' denotes a non boolean field). The next two buttons are the down (yellow) and up (blue) buttons which allow the user to scroll through the menu, and increment and decrement the 3 non-boolean fields. These buttons currently have no effect outside of the settings menu. The final button is the select/start button. In the settings menu, this button will toggle boolean options, and enter edit more for non boolean options. Outside of the setings menu, the start button allows the user to progress through the state machine. Asside from the settings menu, there is no way to return to a previous state.
-    
-    Using the buttons to navigate the menu display, users can view [...] pages which display [...] information. To start the measurement process the user executes the following steps:</p>
+    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Starting from the user's far left, the red button allows the user to access the system settings. Pressing the button again will return the user to their last screen. The settings are only accessible before a rise has been started. In the settings menu, the user can toggle the wireless connection*, alerts*, the elapsed rise time, a rise progress bar, and select timed or volume based rise, desired rise time**, target rise volume**, and scan frequency in multiples of 10 minutes** ('*' denotes incomplete options, '**' denotes a non boolean field). The next two buttons are the down (yellow) and up (blue) buttons, which allow the user to scroll through the menu, and increment and decrement the 3 non-boolean fields. These buttons currently have no effect outside of the settings menu. The final button is the select/start button. In the settings menu, this button will toggle boolean options and enter edit mode for non-boolean options. Outside of the settings menu, the start button allows the user to progress through the state machine. Aside from the settings menu, there is no way to return to a previous state.
+</p>
     <h4>BOM</h4>
     <table style="margin-left: 40px;">
         <tr style="font-weight: bold;">
