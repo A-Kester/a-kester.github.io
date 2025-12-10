@@ -31,12 +31,33 @@
     <h4>Code Logic</h4>
     <h5>Header files</h5>
 <p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]
-     Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific library. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
+     Doughbot's source code is mostly split into several header files that contain functions related to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, which mostly contains the ISRs and a function to detect specific button presses.
 </p>
     <h5>State Machine</h5>
-    <p>Explain state machine (im still cleaning it up!)</p>
+    <p>
+        The doughbot state machine is comprised of 5 states. States 1-4 are typical display states which help control the flow of the program. Each display state starts with a call to one of the display functions, followed by button handling logic. State 5 is a partially implemented finish state which simply prints to the console before returning to the home state (state 2).State 0 was reserved for a loading screen which has not been implemented. While slightly counter-intuative, the initial state is state 2 since state 1 is used for the settings. This is meant to make the logic a bit cleaner and be in line with the idea of not being able to go back a state, other than to reach the settings menu.
+        <ol> States:
+            <li>
+                Settings
+                <p>This state can only be acessed by states 2 and 3, and on completion (red button) will return to the state it came from. The yellow and blue buttons can be used to navigate the Settings pages, and the green button is used to toggle options. For non boolean options, pressing the start button will enter edit mode, denoted by a blinking cursor. In edit mode, the yellow and blue buttons can be used to update the value one digit at a time. To move to the next digit, press the green button. After setting the last digit, press the green button again to save the new value and exit edit mode. This state relys on the <b>display_settings</b> function to display the settings menu with the cursor in the right place. The handling of up,down, and start buttons were broken into seperate functions due to their complexity.</p>
+            </li>
+            <li>
+                Idle
+                <p>The Idle state is Doughbot's initial state where it waits for the user to place the desired bowl (empty) inside. From this state, the user can either go to the settings, or progess to the ready state when the bowl has been placed. The <b>display_home_screen()</b> function handles the screen display for this state. Button control was not split into another function because it is not very complicated</p>
+            </li>
+            <li>
+                Ready
+                <p>The ready state is the last state where the user can access the settings. At this point, doughbot has scanned the empty bowl and is ready to begin the rise process. Like the Idle state, the user can only acess the settings menu, or the next state. The <b>display_ready_screen</b> handles the screen display for this state. Button control was not split into another function because it is not very complicated</p>
+            </li>
+            <li>
+                Rising
+                <p>Once the rising state has started, the user cannot leave this state until the dough is done rising (other than reseting the board). The settings menu is not accessable at this point for simplicity. Realistically, once the dough has started rising, there should not be a need to change any of the settings. If Doughbot is set to time mode, the program will not scan the dough, and will enter the complete state when the timer (non blocking software timer implemented with millis() function) expires. If Doughbot is set to Volume node, Doughbot will scan the dough at a frequency determined by the scan freq setting (multiples of 10 minutes). Doughbot will enter the complete state only when the scanned volume is x times larger than its initial volume, where x is the rise factor setting. In both cases, the <b>display_rise_progress</b> function handles the screen display, allowing the user to see how close the dough is to being done.</p>
+            </li>
+            <li>Complete</li>
+        </ol>
+    </p>
     <h4>User Interface</h4>
-    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Starting from the user's far left, the red button allows the user to access the system settings. Pressing the button again will return the user to their last screen. The settings are only accessible before a rise has been started. In the settings menu, the user can toggle the wireless connection*, alerts*, the elapsed rise time, a rise progress bar, and select timed or volume based rise, desired rise time**, target rise volume**, and scan frequency in multiples of 10 minutes** ('*' denotes incomplete options, '**' denotes a non boolean field). The next two buttons are the down (yellow) and up (blue) buttons, which allow the user to scroll through the menu, and increment and decrement the 3 non-boolean fields. These buttons currently have no effect outside of the settings menu. The final button is the select/start button. In the settings menu, this button will toggle boolean options and enter edit mode for non-boolean options. Outside of the settings menu, the start button allows the user to progress through the state machine. Aside from the settings menu, there is no way to return to a previous state.
+    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Starting from the user's far left, the red button accesses the system settings. Pressing the button again will return the user to their last screen. The settings are only accessible before a rise has been started. In the settings menu, the user can toggle the wireless connection*, alerts*, the elapsed rise time, a rise progress bar, and select timed or volume based rise, desired rise time**, target rise volume**, and scan frequency in multiples of 10 minutes** ('*' denotes incomplete options, '**' denotes a non boolean field). The next two buttons are the down (yellow) and up (blue) buttons, which allow the user to scroll through the menu and increment and decrement the 3 non-boolean fields. These buttons currently have no effect outside of the settings menu. The final button is the select/start button. In the settings menu, this button will toggle boolean options and enter edit mode for non-boolean options. Outside of the settings menu, the start button allows the user to progress through the state machine. Aside from the settings menu, there is no way to return to a previous state.
 </p>
     <h4>BOM</h4>
     <table style="margin-left: 40px;">
