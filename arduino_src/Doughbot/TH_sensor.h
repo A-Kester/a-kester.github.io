@@ -15,7 +15,7 @@ void get_temp_humid(struct temp_humid *);
 void init_temp_humid(){
   if (! aht.begin()) {
     Serial.println("Could not find AHT? Check wiring");
-    while (1) delay(10);
+    //while (1) delay(10);
   }
 }
 

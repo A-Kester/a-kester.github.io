@@ -59,7 +59,7 @@ uint8_t has_been_pressed(uint8_t button) {
       break;
     case B_DOWN:
       if ((button_status & DOWN_MASK) > 0) {
-        Serial.println("Down");
+        //Serial.println("Down");
         // Handle Down button Pressed
         button_status &= ~DOWN_MASK; // clear the start bit
         return 1;
