@@ -30,11 +30,13 @@
     <b>math</b><br>This library is also built-in to handle our volume computations using pi.<br></p>
     <h4>Code Logic</h4>
     <h5>Header files</h5>
-    <p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]
+    <p style="margin-left: 40px;">
      Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
     </p>
     <h5>State Machine</h5>
-    <img src="images/state_machine.png" alt="flow chart of Doughbot state machine" width="475" height="550">
+    <div class="imgs">
+        <img src="images/state_machine.png" alt="flow chart of Doughbot state machine" width="600" height="475">
+    </div>
     <p>
         The doughbot state machine is comprised of 5 states. States 1-4 are typical display states which help control the flow of the program. Each display state starts with a call to one of the display functions, followed by button handling logic. State 5 is a partially implemented finish state which simply prints to the console before returning to the home state (state 2).State 0 was reserved for a loading screen which has not been implemented. While slightly counter-intuative, the initial state is state 2 since state 1 is used for the settings. This is meant to make the logic a bit cleaner and be in line with the idea of not being able to go back a state, other than to reach the settings menu. The following is a detailed description of each state:
         <ol>
@@ -159,8 +161,8 @@
         <img src="images/IMG_5210.jpeg" alt="zoom assembly" width="500" height="375">
     </div>
     <div class="imgs">
-        <img src="images/Dbot_zero.jpeg" alt="Doughbot zero'd" width="400" height="400">
-        <img src="images/Dbot_mid.jpeg" alt="Doughbot midway though rise" width="400" height="400">
+        <img src="images/Dbot_zero.jpeg" alt="Doughbot zero'd" width="375" height="450">
+        <img src="images/Dbot_mid.jpeg" alt="Doughbot midway though rise" width="375" height="450">
     </div>
     
 </div>
