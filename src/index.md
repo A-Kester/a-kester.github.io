@@ -156,6 +156,8 @@
     <div class="imgs">
         <img src="images/IMG_5208.jpeg" alt="full assembly" width="375" height="450">
         <img src="images/IMG_5210.jpeg" alt="zoom assembly" width="500" height="375">
+        <img src="images/Dbot_zero.jpeg" alt="stand" width="400" height="400">
+        <img src="images/Dbot_mid.jpeg" alt="mount" width="400" height="400">
     </div>
 </div>
 
