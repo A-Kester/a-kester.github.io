@@ -114,14 +114,17 @@
     </div>
 </div>
 
-## Result
+## Results
 
 ## Accessibility
 <div id="accessibility">
-    <p>Using our device requires the ability to adjust the stand and centering mechanism around the bowl, push buttons, and read the display. This current design may be difficult for people with limited use of their hands or vision problems.<br>To make our ES more accessible we are working to transmit the data displayed on the LCD to a web server where users can then use a screen reader to receive updates on the status of their dough. Other changes we could implement in the future to improve accessibility include designing a more simple case / stand for the device to be housed in and then attached to the user's bowl. 
+    <p>Using our device requires the ability to adjust the stand and centering mechanism around the bowl, push buttons, and read the display. This current design may be difficult for people with limited use of their hands or vision problems.<br>To make our ES more accessible we would work to transmit the data displayed on the LCD to a web server where users can then use a screen reader to receive updates on the status of their dough. Other changes we could implement in the future to improve accessibility include designing a more simple case / stand for the device to be housed in and then attached to the user's bowl, including language settings, and considering challenges that might face those who are color-blind. One potential challenge for those blue-green colorblindness is that the "start" button is green and the "up" button is blue, possibly causing confusion if not labeled or explicitly identified otherwise.</p> 
 </div>
 
 ## Ethical Implications
+<div id="ethics">
+    <p>Given that our device does not stream any data, we find few ethical issues. If data were to be streamed to a web server, this would introduce data privacy and security concerns. Furthermore, our device does not collect an personal information or store any data collected via the TOF or temperature/humidity sensors.</p>
+</div>
 
 ## Schedule
 <div id="schedule" class="container" style="margin-left: 40px; flex-direction: row;"> 
@@ -268,6 +271,35 @@
 </div>
 
 ## Issues
+<div id="issues">
+    <p>Over the course of the project we encounted a number of issues which are ennumerated below with our corresponding resolutions.</p>
+    <table style="margin-left: 40px;">
+        <tr style="font-weight: bold;">
+            <td>Issue</td>
+            <td>Resolution</td>
+        </tr>
+        <tr>
+            <td>Our 3D prints were designed with no tolerances so pieces did not fit together.</td>
+            <td>We reprinted some pieces. Others were shaved down with a knife, drill, or sandpaper.</td>
+        </tr>
+        <tr>
+            <td>The breadboard we ordered was half-sized and didn't comfortable fit all our components.</td>
+            <td>We are borrowing a full-size breadboard from Professor Vaccari.</td>
+        </tr>
+        <tr>
+            <td>The motor was slipping not allowing the gear to effectively push the rack holding the TOF sensor.</td>
+            <td>We super glued the gear to the motor.</td>
+        </tr>
+        <tr>
+            <td>The TOF sensor would not run on the same bus as the motor.</td>
+            <td>The TOF sensor is now getting power and ground from a different source, alleviating the issue.</td>
+        </tr>
+        <tr>
+            <td>The LCD requires 5V which we had not accounted for initially.</td>
+            <td>We were able to power it up with 5V but drive it from the logic pins of the ESP32.</td>
+        </tr>
+    </table>
+</div>
 
 ## Future Work
 
