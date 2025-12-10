@@ -42,7 +42,7 @@ uint8_t block_full[] = { // Fully filled block
 // 1: Show Progress Bar
 // 0: Show Elapsed Time
 char* settings_lut[] = {"WIRELESS: ",  "ALERTS: ", "RISE TYPE: ", "RISE TIME: ", "RISE FACTOR: ", "SCAN FREQ: ", "PROGRESS: ", "ELAPSED TIME: ", "  "};
-char r_time[] = {'0', '0', ':', '0', '0', '\0'};
+char r_time[] = {'0', '2', ':', '0', '0', '\0'};
 char r_factor[] = {'2', '\0'};
 char s_freq[] = {'5', '\0'};
 char * settings_opts_lut[] = {"ON",  "On", "VOL", r_time, r_factor,  s_freq,  "Show", "Show", "  ",

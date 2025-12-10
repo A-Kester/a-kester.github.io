@@ -8,8 +8,8 @@ Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 int tof_data[MAX_SIZE] = {0}; // initialize measurements to 0
 double step = (double)BOWL_RAD_MM / MAX_SIZE;
 int top = -1; // empty stack
-double bowl_area = 0;
-double dough_area = 0;
+//double bowl_area = 0;
+//double dough_area = 0;
 
 void push(int val);
 int get_mil();
@@ -35,13 +35,13 @@ void push(int val) {
 int get_mil() {
   VL53L0X_RangingMeasurementData_t measure;
 
-  Serial.print("Reading a measurement... ");
+  //Serial.print("Reading a measurement... ");
   lox.rangingTest(&measure, false);
 
   if (measure.RangeStatus != 4) {  // phase failures have incorrect data
     int mil = measure.RangeMilliMeter;
-    Serial.print("Distance (mm): "); 
-    Serial.println(mil);
+    //Serial.print("Distance (mm): "); 
+    //Serial.println(mil);
     return mil;
   } else {
     Serial.println(" out of range ");
