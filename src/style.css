@@ -26,3 +26,10 @@ p {
 p.footnote {
     text-align: left;
 }
+
+.parts {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;  /* centers vertically if wrapper has height */
+    /*gap: 20px;*/ 
+}
