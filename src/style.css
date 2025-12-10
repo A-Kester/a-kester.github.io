@@ -33,3 +33,14 @@ p.footnote {
     align-items: center;  /* centers vertically if wrapper has height */
     margin-bottom: 20px; 
 }
+
+ol {
+    max-width: 80%;
+}
+
+ol li::marker {
+    color: var(--theme-foreground-alt);
+    font-weight: 700;
+    line-height: 1.15;
+    font-size: 0.83em;
+}

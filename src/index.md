@@ -38,23 +38,23 @@
         The doughbot state machine is comprised of 5 states. States 1-4 are typical display states which help control the flow of the program. Each display state starts with a call to one of the display functions, followed by button handling logic. State 5 is a partially implemented finish state which simply prints to the console before returning to the home state (state 2).State 0 was reserved for a loading screen which has not been implemented. While slightly counter-intuative, the initial state is state 2 since state 1 is used for the settings. This is meant to make the logic a bit cleaner and be in line with the idea of not being able to go back a state, other than to reach the settings menu. The following is a detailed description of each state:
         <ol>
             <li>
-                <h6>Settings</h6>
+                <h5>Settings</h5>
                 <p>This state can only be accessed by states 2 and 3, and on completion (red button) will return to the state it came from. The yellow and blue buttons can be used to navigate the Settings pages, and the green button is used to toggle options. For non boolean options, pressing the start button will enter edit mode, denoted by a blinking cursor. In edit mode, the yellow and blue buttons can be used to update the value one digit at a time. To move to the next digit, press the green button. After setting the last digit, press the green button again to save the new value and exit edit mode. This state relies on the <b>display_settings</b> function to display the settings menu with the cursor in the right place. The handling of up, down, and start buttons was broken into separate functions due to their complexity.</p>
             </li>
             <li>
-                <h6>Idle</h6>
+                <h5>Idle</h5>
                 <p>The Idle state is Doughbot's initial state, where it waits for the user to place the desired bowl (empty) inside. From this state, the user can either go to the settings or progress to the ready state when the bowl has been placed. The <b>display_home_screen()</b> function handles the screen display for this state. Button control was not split into another function because it is not very complicated</p>
             </li>
             <li>
-                <h6>Ready</h6>
+                <h5>Ready</h5>
                 <p>The ready state is the last state where the user can access the settings. At this point, Doughbot has scanned the empty bowl and is ready to begin the rise process. Like the Idle state, the user can only access the settings menu, or the next state. The <b>display_ready_screen</b> handles the screen display for this state. Button control was not split into another function because it is not very complicated</p>
             </li>
             <li>
-                <h6>Rising</h6>
+                <h5>Rising</h5>
                 <p>Once the rising state has started, the user cannot leave this state until the dough is done rising (other than resetting the board). The settings menu is not accessible at this point for simplicity. Realistically, once the dough has started rising, there should not be a need to change any of the settings. If Doughbot is set to time mode, the program will not scan the dough and will enter the complete state when the timer (non-blocking software timer implemented with millis() function) expires. If Doughbot is set to the Volume node, Doughbot will scan the dough at a frequency determined by the scan freq setting (multiples of 10 minutes). Doughbot will enter the complete state only when the scanned volume is x times larger than its initial volume, where x is the rise factor setting. In both cases, the <b>display_rise_progress</b> function handles the screen display, allowing the user to see how close the dough is to being done.</p>
             </li>
             <li>
-                <h6>Complete</h6>
+                <h5>Complete</h5>
                 <p>This state is currently not visible to the user. It simply prints a message to the console and returns to the start state. This state was created to handle alerting the user, but since that is not implemented, it is just a transitory state.</p>
             </li>
         </ol>
@@ -156,8 +156,10 @@
     <div class="imgs">
         <img src="images/IMG_5208.jpeg" alt="full assembly" width="375" height="450">
         <img src="images/IMG_5210.jpeg" alt="zoom assembly" width="500" height="375">
-        <img src="images/Dbot_zero.jpeg" alt="stand" width="400" height="400">
-        <img src="images/Dbot_mid.jpeg" alt="mount" width="400" height="400">
+    </div>
+    <div class="imgs">
+        <img src="images/Dbot_zero.jpeg" alt="zero" width="375" height="450">
+        <img src="images/Dbot_mid.jpeg" alt="mid" width="400" height="400">
     </div>
 </div>
 
