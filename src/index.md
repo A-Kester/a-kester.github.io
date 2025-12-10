@@ -141,12 +141,12 @@
     </table>
     <p style="margin-left: 40px;"><b>3D Printed Components</b></p>
     <div class="imgs">
-        <img src="/images/fusion_stand.png" alt="stand" width="500" height="375">
-        <img src="/images/fusion_mount.png" alt="mount" width="500" height="375">
+        <img src="images/fusion_stand.png" alt="stand" width="500" height="375">
+        <img src="images/fusion_mount.png" alt="mount" width="500" height="375">
     </div>
     <div class="imgs">
-        <img src="/images/img_4955.jpeg" alt="feet" width="500" height="375">
-        <img src="/images/img_4825.jpeg" alt="centering mechanism" width="375" height="450">
+        <img src="images/IMG_4955.jpeg" alt="feet" width="500" height="375">
+        <img src="images/IMG_4825.jpeg" alt="centering mechanism" width="375" height="450">
     </div>
 </div>
 
@@ -154,8 +154,8 @@
 <div id="results">
     <p>Once the stand is fitted to the size of the bowl, the user first zeroes the bowl by running a measurement along the empty bowl. A plastic / non-reflective bowl is preferred since a metal bowl creates too much reflection for the TOF sensor to accurately read measurements. Then, dough is placed in the bowl and the user initiates the rise cycle by taking a baseline dough measurement and defining the scan frequency they desire. Whenever the user checks on their dough, they can view the rise progress bar to monitor whether their dough has doubled in size.</p>
     <div class="imgs">
-        <img src="/images/img_5208.jpeg" alt="full assembly" width="375" height="450">
-        <img src="/images/img_5210.jpeg" alt="zoom assembly" width="500" height="375">
+        <img src="images/IMG_5208.jpeg" alt="full assembly" width="375" height="450">
+        <img src="images/IMG_5210.jpeg" alt="zoom assembly" width="500" height="375">
     </div>
 </div>
 
