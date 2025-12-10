@@ -31,14 +31,14 @@
     <h4>Code Logic</h4>
     <h5>Header files</h5>
     <p style="margin-left: 40px;">
-     Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
+     Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISRs and a function to detect specific button presses.
     </p>
     <h5>State Machine</h5>
     <div class="imgs">
         <img src="images/state_machine.png" alt="flow chart of Doughbot state machine" width="600" height="475">
     </div>
     <p>
-        The doughbot state machine is comprised of 5 states. States 1-4 are typical display states which help control the flow of the program. Each display state starts with a call to one of the display functions, followed by button handling logic. State 5 is a partially implemented finish state which simply prints to the console before returning to the home state (state 2).State 0 was reserved for a loading screen which has not been implemented. While slightly counter-intuative, the initial state is state 2 since state 1 is used for the settings. This is meant to make the logic a bit cleaner and be in line with the idea of not being able to go back a state, other than to reach the settings menu. The following is a detailed description of each state:
+        The doughbot state machine is comprised of 5 states. States 1-4 are typical display states which help control the flow of the program. Each display state starts with a call to one of the display functions, followed by button handling logic. State 5 is a partially implemented finish state which simply prints to the console before returning to the home state (state 2). State 0 was reserved for a loading screen which has not been implemented. While slightly counter-intuative, the initial state is state 2 since state 1 is used for the settings. This is meant to make the logic a bit cleaner and be in line with the idea of not being able to go back a state, other than to reach the settings menu. The following is a detailed description of each state:
         <ol>
             <li>
                 <h5>Settings</h5>
@@ -54,7 +54,7 @@
             </li>
             <li>
                 <h5>Rising</h5>
-                <p>Once the rising state has started, the user cannot leave this state until the dough is done rising (other than resetting the board). The settings menu is not accessible at this point for simplicity. Realistically, once the dough has started rising, there should not be a need to change any of the settings. If Doughbot is set to time mode, the program will not scan the dough and will enter the complete state when the timer (non-blocking software timer implemented with millis() function) expires. If Doughbot is set to the Volume node, Doughbot will scan the dough at a frequency determined by the scan freq setting (multiples of 10 minutes). Doughbot will enter the complete state only when the scanned volume is x times larger than its initial volume, where x is the rise factor setting. In both cases, the <b>display_rise_progress</b> function handles the screen display, allowing the user to see how close the dough is to being done.</p>
+                <p>Once the rising state has started, the user cannot leave this state until the dough is done rising (other than resetting the board). The settings menu is not accessible at this point for simplicity. Realistically, once the dough has started rising, there should not be a need to change any of the settings. If Doughbot is set to <em>Time mode</em>, the program will not scan the dough and will enter the complete state when the timer (non-blocking software timer implemented with millis() function) expires. If Doughbot is set to the <em>Volume node</em>, Doughbot will scan the dough at a frequency determined by the scan freq setting (multiples of 10 minutes). Doughbot will enter the complete state only when the scanned volume is x times larger than its initial volume, where x is the rise factor setting. In both cases, the <b>display_rise_progress</b> function handles the screen display, allowing the user to see how close the dough is to being done.</p>
             </li>
             <li>
                 <h5>Complete</h5>
@@ -261,7 +261,6 @@
                 <td>Proposal Due
                     <ul>
                         <li>Finalized materials</li>
-                        <li>?? Find drivers for sensors</li>
                         <li>Finalized functional design</li>
                         <li>Began 3D printing</li>
                     </ul>
@@ -300,6 +299,7 @@
                 <td>
                     <ul>
                         <li>Wrote volume calculation code</li>
+                        <li>Continued writing motor & display code</li> 
                     </ul>
                 </td>
             </tr>
