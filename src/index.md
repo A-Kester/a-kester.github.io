@@ -30,9 +30,9 @@
     <b>math</b><br>This library is also built-in to handle our volume computations using pi.<br></p>
     <h4>Code Logic</h4>
     <h5>Header files</h5>
-<p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]
-     Doughbot's source code is mostly split into several header files that contain functions related to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, which mostly contains the ISRs and a function to detect specific button presses.
-</p>
+    <p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]
+     Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific libraries. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
+    </p>
     <h5>State Machine</h5>
     <p>
         The doughbot state machine is comprised of 5 states. States 1-4 are typical display states which help control the flow of the program. Each display state starts with a call to one of the display functions, followed by button handling logic. State 5 is a partially implemented finish state which simply prints to the console before returning to the home state (state 2).State 0 was reserved for a loading screen which has not been implemented. While slightly counter-intuative, the initial state is state 2 since state 1 is used for the settings. This is meant to make the logic a bit cleaner and be in line with the idea of not being able to go back a state, other than to reach the settings menu.
@@ -57,8 +57,7 @@
         </ol>
     </p>
     <h4>User Interface</h4>
-    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Starting from the user's far left, the red button accesses the system settings. Pressing the button again will return the user to their last screen. The settings are only accessible before a rise has been started. In the settings menu, the user can toggle the wireless connection*, alerts*, the elapsed rise time, a rise progress bar, and select timed or volume based rise, desired rise time**, target rise volume**, and scan frequency in multiples of 10 minutes** ('*' denotes incomplete options, '**' denotes a non boolean field). The next two buttons are the down (yellow) and up (blue) buttons, which allow the user to scroll through the menu and increment and decrement the 3 non-boolean fields. These buttons currently have no effect outside of the settings menu. The final button is the select/start button. In the settings menu, this button will toggle boolean options and enter edit mode for non-boolean options. Outside of the settings menu, the start button allows the user to progress through the state machine. Aside from the settings menu, there is no way to return to a previous state.
-</p>
+    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Starting from the user's far left, the red button allows the user to access the system settings. Pressing the button again will return the user to their last screen. The settings are only accessible before a rise has been started. In the settings menu, the user can toggle the wireless connection*, alerts*, the elapsed rise time, a rise progress bar, and select timed or volume based rise, desired rise time**, target rise volume**, and scan frequency in multiples of 10 minutes** ('*' denotes incomplete options, '**' denotes a non boolean field). The next two buttons are the down (yellow) and up (blue) buttons which allow the user to scroll through the menu, and increment and decrement the 3 non-boolean fields. These buttons currently have no effect outside of the settings menu. The final button is the select/start button. In the settings menu, this button will toggle boolean options, and enter edit mode for non boolean options. Outside of the setings menu, the start button allows the user to progress through the state machine. Asside from the settings menu, there is no way to return to a previous state.</p>
     <h4>BOM</h4>
     <table style="margin-left: 40px;">
         <tr style="font-weight: bold;">
@@ -138,18 +137,29 @@
         </tr>
     </table>
     <p style="margin-left: 40px;"><b>3D Printed Components</b></p>
-    <div class="parts">
-        <img src="/images/img_4825.jpeg" alt="centering mechanism" width="375" height="450">
+    <div class="imgs">
+        <img src="/images/fusion_stand.png" alt="stand" width="500" height="375">
+        <img src="/images/fusion_mount.png" alt="mount" width="500" height="375">
+    </div>
+    <div class="imgs">
         <img src="/images/img_4955.jpeg" alt="feet" width="500" height="375">
+        <img src="/images/img_4825.jpeg" alt="centering mechanism" width="375" height="450">
     </div>
 </div>
 
 ## Results
+<div id="results">
+    <p>Once the stand is fitted to the size of the bowl, the user first zeroes the bowl by running a measurement along the empty bowl. A plastic / non-reflective bowl is preferred since a metal bowl creates too much reflection for the TOF sensor to accurately read measurements. Then, dough is placed in the bowl and the user initiates the rise cycle by taking a baseline dough measurement and defining the scan frequency they desire. Whenever the user checks on their dough, they can view the rise progress bar to monitor whether their dough has doubled in size.</p>
+    <div class="imgs">
+        <img src="/images/img_5208.jpeg" alt="full assembly" width="375" height="450">
+        <img src="/images/img_5210.jpeg" alt="zoom assembly" width="500" height="375">
+    </div>
+</div>
 
 ## Accessibility
 
 <div id="accessibility">
-    <p>Using our device requires the ability to adjust the stand and centering mechanism around the bowl, push buttons, and read the display. This current design may be difficult for people with limited use of their hands or vision problems.<br>To make our ES more accessible we would work to transmit the data displayed on the LCD to a web server where users can then use a screen reader to receive updates on the status of their dough. Other changes we could implement in the future to improve accessibility include designing a more simple case / stand for the device to be housed in and then attached to the user's bowl, including language settings, and considering challenges that might face those who are color-blind. One potential challenge for those blue-green colorblindness is that the "start" button is green and the "up" button is blue, possibly causing confusion if not labeled or explicitly identified otherwise.</p> 
+    <p>Using our device requires the ability to adjust the stand and centering mechanism around the bowl, push buttons, and read the display. This current design may be difficult for people with limited use of their hands or vision problems.<br><br>To make our ES more accessible we would work to transmit the data displayed on the LCD to a web server where users can then use a screen reader to receive updates on the status of their dough. Other changes we could implement in the future to improve accessibility include designing a more simple case / stand for the device to be housed in and then attached to the user's bowl, including language settings, and considering challenges that might face those who are color-blind. One potential challenge for those blue-green colorblindness is that the "start" button is green and the "up" button is blue, possibly causing confusion if not labeled or explicitly identified otherwise.</p> 
 </div>
 
 ## Ethical Implications
@@ -336,8 +346,28 @@
 </div>
 
 ## Future Work
+<div id="future-work">
+    <p>If we had more time to work on our project, there are a number of changes and improvements we would like to make.
+        <ul>
+            <li>Redesign the stand to instead attach directly to the bowl, expanding the range of bowls accommodated.</li>
+            <li>Develop a web server to wirelessly stream dough progress and other updates to a user's PC or mobile device.</li>
+            <li>Implement alerts to notify the user when their dough has doubled in size, or at other progress points along the rise.</li>
+            <li>Design an alternate method of interacting with the device to increase accessibility.</li>
+        </ul>
+    </p>
+</div>
 
 ## References
+<div id="references">
+    <p class="footnote" id="footnote-1"> [1] “Dough Processing Sensors | KEYENCE America,” accessed December 7, 2025, https://www.keyence.com/products/measure/industries/food-and-beverage/dough-processing-sensors.jsp.</p>
+    <p class="footnote" id="footnote-2"> [2] “Crustello: Smart AI Dough & Sourdough Tracker,” Kickstarter, March 1, 2026, https://www.kickstarter.com/projects/racebox/crustello.</p>
+    <p class="footnote" id="footnote-3">[3] Ada, Lady. “Overview | Adafruit HUZZAH32 - ESP32 Feather | Adafruit Learning System.” Accessed December 10, 2025. https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/overview.</p>
+    <p class="footnote" id="footnote-4">[4] Ada, Lady. “Overview | Adafruit Stepper + DC Motor FeatherWing | Adafruit Learning System.” Accessed December 10, 2025. https://learn.adafruit.com/adafruit-stepper-dc-motor-featherwing/overview.</p>
+    <p class="footnote" id="footnote-5">[5] Ada, Lady. “Overview | Adafruit VL53L0X Time of Flight Micro-LIDAR Distance Sensor Breakout | Adafruit Learning System.” Accessed December 10, 2025. https://learn.adafruit.com/adafruit-vl53l0x-micro-lidar-distance-sensor-breakout/overview.</p>
+    <p class="footnote" id="footnote-6">[6] Industries, Adafruit. “Mini Stepper Motor - 200 Steps - 20x30mm NEMA-8 Size.” Accessed December 10, 2025. https://www.adafruit.com/product/4411.</p>
+    <p class="footnote" id="footnote-7">[7] Rembor, Kattni. “Overview | Adafruit AHT20 Temperature & Humidity Sensor | Adafruit Learning System.” Accessed December 10, 2025. https://learn.adafruit.com/adafruit-aht20/overview.</p>
+</div>
 
-<p class="footnote" id="footnote-1"> [1] “Dough Processing Sensors | KEYENCE America,” accessed December 7, 2025, https://www.keyence.com/products/measure/industries/food-and-beverage/dough-processing-sensors.jsp.</p>
-<p class="footnote" id="footnote-2"> [2] “Crustello: Smart AI Dough & Sourdough Tracker,” Kickstarter, March 1, 2026, https://www.kickstarter.com/projects/racebox/crustello.</p>
+
+
+
