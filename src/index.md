@@ -1,9 +1,11 @@
 <link rel="stylesheet" href="style.css">
 
 # Dough Bot
+
 ### Anna Kester & Grayson Wade
 
 ## Introduction
+
 <div id="intro">
     <p>DoughBot was born out of a problem that troubles many bakers, specifically those tasked with letting dough rise. It can be difficult to visually determine when dough in a standard concave bowl has doubled in size, fundamentally undermining the precise nature of baking. Thus, we set forth to develop an embedded system that will sense when the dough has doubled in size and alert the baker of its status.</p>
     <p>Existing solutions are almost exclusively for commercial baking applications <a href="#footnote-1"><sup>[1]</sup></a>, or one home baking <em>smart</em> bowl "Crustello" has yet to be become publically available<a href="#footnote-2"><sup>[2]</sup></a>.
@@ -11,6 +13,7 @@
 </div>
 
 ## Methods
+
 <div id="methods">
     <h4>Devices & Peripherals</h4>
     <p style="margin-left: 40px;"><b>Adafruit HUZZAH32 - ESP32 Feather</b><br>We chose to use the ESP32 because of its small size, integration with FeatherWings, and options for WiFi capability.<br>
@@ -26,9 +29,16 @@
     <b>LiquidCrystal</b><br>This built-in library handles communication and writing to the LCD.<br>
     <b>math</b><br>This library is also built-in to handle our volume computations using pi.<br></p>
     <h4>Code Logic</h4>
-    <p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]</p>
+    <h5>Header files</h5>
+    <p style="margin-left: 40px;">[Explain code logic, how it works, why its designed that way]
+     Doughbot's source code is mostly broken into a number of header files that contain functions relating to specific library. The only two exceptions to this are Helper.h, which contains helper functions for a variety of files, and Buttons.h, that mostly contains the ISR's and a function to detect specific button presses.
+    </p>
+    <h5>State Machine</h5>
+    <p>Explain state machine (im still cleaning it up!)</p>
     <h4>User Interface</h4>
-    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Using the buttons to navigate the menu display, users can view [...] pages which display [...] information. To start the measurement process the user executes the following steps:</p>
+    <p style="margin-left: 40px;">Users can interact with the system via the LCD screen and four buttons. Starting from the users far left, the red button allows the user to access the system settings. Pressing the button again will return the user to their last screen. The settings are only accessable before a rise has been started. In the settings menu, the user can toggle the wireless connection*, alerts*, the elapsed rise time, a rise progress bar, and select timed or volume based rise, desired rise time**, target rise volume**, and scan frequency in multiples of 10 minutes** ('*' denotes incomplete options, '**' denotes a non boolean field). The next two buttons are the down (yellow) and up (blue) buttons which allow the user to scroll through the menu, and increment and decrement the 3 non-boolean fields. These buttons currently have no effect outside of the settings menu. The final button is the select/start button. In the settings menu, this button will toggle boolean options, and enter edit more for non boolean options. Outside of the setings menu, the start button allows the user to progress through the state machine. Asside from the settings menu, there is no way to return to a previous state.
+    
+    Using the buttons to navigate the menu display, users can view [...] pages which display [...] information. To start the measurement process the user executes the following steps:</p>
     <h4>BOM</h4>
     <table style="margin-left: 40px;">
         <tr style="font-weight: bold;">
@@ -117,16 +127,19 @@
 ## Results
 
 ## Accessibility
+
 <div id="accessibility">
     <p>Using our device requires the ability to adjust the stand and centering mechanism around the bowl, push buttons, and read the display. This current design may be difficult for people with limited use of their hands or vision problems.<br>To make our ES more accessible we would work to transmit the data displayed on the LCD to a web server where users can then use a screen reader to receive updates on the status of their dough. Other changes we could implement in the future to improve accessibility include designing a more simple case / stand for the device to be housed in and then attached to the user's bowl, including language settings, and considering challenges that might face those who are color-blind. One potential challenge for those blue-green colorblindness is that the "start" button is green and the "up" button is blue, possibly causing confusion if not labeled or explicitly identified otherwise.</p> 
 </div>
 
 ## Ethical Implications
+
 <div id="ethics">
     <p>Given that our device does not stream any data, we find few ethical issues. If data were to be streamed to a web server, this would introduce data privacy and security concerns. Furthermore, our device does not collect an personal information or store any data collected via the TOF or temperature/humidity sensors.</p>
 </div>
 
 ## Schedule
+
 <div id="schedule" class="container" style="margin-left: 40px; flex-direction: row;"> 
     <div id="original">
         <br>
@@ -271,6 +284,7 @@
 </div>
 
 ## Issues
+
 <div id="issues">
     <p>Over the course of the project we encounted a number of issues which are ennumerated below with our corresponding resolutions.</p>
     <table style="margin-left: 40px;">
@@ -304,5 +318,6 @@
 ## Future Work
 
 ## References
+
 <p class="footnote" id="footnote-1"> [1] “Dough Processing Sensors | KEYENCE America,” accessed December 7, 2025, https://www.keyence.com/products/measure/industries/food-and-beverage/dough-processing-sensors.jsp.</p>
 <p class="footnote" id="footnote-2"> [2] “Crustello: Smart AI Dough & Sourdough Tracker,” Kickstarter, March 1, 2026, https://www.kickstarter.com/projects/racebox/crustello.</p>

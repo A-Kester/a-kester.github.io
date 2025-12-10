@@ -51,7 +51,7 @@ char * settings_opts_lut[] = {"ON",  "On", "VOL", r_time, r_factor,  s_freq,  "S
 void lcd_init();
 void display_home_screen();
 void display_ready_screen();
-void display_rise_progress(uint8_t perc);
+void display_rise_progress(uint8_t perc, bool show);
 void display_settings(uint8_t sel_index, uint8_t cursor_offset);
 void write_prog_str (uint8_t perc, uint8_t row, uint8_t col);
 
@@ -90,15 +90,17 @@ void display_ready_screen() {
   lcd.print("Config: ");
 }
 
-void display_rise_progress(uint8_t perc) {
+void display_rise_progress(uint8_t perc, bool show) {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("DOUGHBOT: RISING");
-  write_prog_str(perc, 0, 1);
-  char str_buff[15]; // max value would be 100%'\0' = 5 chars
-  sprintf(str_buff, "PROGRESS: %d%%", perc);
-  lcd.setCursor(0, 2);
-  lcd.print(str_buff);
+  if (show == true) {
+    write_prog_str(perc, 0, 1);
+    char str_buff[15]; // max value would be 100%'\0' = 5 chars
+    sprintf(str_buff, "PROGRESS: %d%%", perc);
+    lcd.setCursor(0, 2);
+    lcd.print(str_buff);
+  }
   lcd.setCursor(0, 3);
   lcd.print("ETC: 00:00");
 }

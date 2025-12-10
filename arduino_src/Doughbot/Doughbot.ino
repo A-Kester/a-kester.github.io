@@ -41,6 +41,8 @@ double getVolume(int* vals);
 uint32_t scan_bowl();
 uint32_t get_area();
 void unwind_motor();
+void handle_settings_buttons();
+void handle_settings_start();
 
 void setup() {
   Serial.begin(115200);
@@ -84,42 +86,15 @@ void loop() {
         lcd.noCursor();
         lcd.noBlink();
       }
-      
-      if (has_been_pressed(B_DOWN)) {
-        if (editing_time == 1) {
-          int_setting_change(DOWN, settings_opts_lut[3], time_cursor_lut[time_index]);
-        } else if (editing_rise_factor == 1){
-          int_setting_change(DOWN, settings_opts_lut[4], 0);
-        } else if (editing_scan_freq == 1){
-          int_setting_change(DOWN, settings_opts_lut[5], 0);
-        } else if (settings_index < 7) settings_index += 1;
-        Serial.println(settings, BIN);
-        break;
-      }
-      if (has_been_pressed(B_UP)) {
-        if (editing_time == 1) {
-          int_setting_change(UP, settings_opts_lut[3], time_cursor_lut[time_index]);
-        } else if (editing_rise_factor == 1){
-          int_setting_change(UP, settings_opts_lut[4], 0);
-        } else if (editing_scan_freq == 1){
-          int_setting_change(UP, settings_opts_lut[5], 0);
-        } else if (settings_index != 0) settings_index -= 1;
-        Serial.println(settings, BIN);
-         break;
-      }
-      if (has_been_pressed(B_START)) {
-        Serial.println(settings, BIN);
-        handle_home_start();
-      }
+      handle_settings_buttons();
       break;
     case 2:
       // Home
       display_home_screen();
       if (has_been_pressed(B_START)) {
-        prev_state = state;
-        // bowl_area = scan_bowl();
+        prev_state = state; 
         // ********** UNCOMMENT LINE BELLOW *************
-        //scan_bowl();
+        //bowl_area = scan_bowl();
         state = 3;
       } else if (has_been_pressed(B_SWAP)) {
         // If both pressed, probably wanna 
@@ -132,8 +107,8 @@ void loop() {
       if (has_been_pressed(B_START)) {
         prev_state = state;
         // ********** UNCOMMENT LINE BELLOW *************
-        //init_dough_area = bowl_area - scan_bowl();
-        init_dough_area = bowl_area - 838620;
+        init_dough_area = bowl_area - scan_bowl();
+        //init_dough_area = bowl_area - 838620;
         // ********** REMOVE LINE ABOVE  *************
         progress = 0;
         start_time = millis();
@@ -152,8 +127,8 @@ void loop() {
         // Using volume rise
         scan_freq = ascii_to_int(*s_freq);
         //if ((curr - start_time) >= (ONE_MIN_MS * scan_freq) ) {
-          //dough_area = bowl_area - scan_bowl();
-          dough_area = bowl_area - 700388;
+          dough_area = bowl_area - scan_bowl();
+          //dough_area = bowl_area - 700388;
           progress = (dough_area* 10) / (2 * init_dough_area);
           start_time = curr;
           if (progress >= 100) {
@@ -168,7 +143,12 @@ void loop() {
           state = 2;
         }
       }
-      display_rise_progress(progress);
+      // Check for show progress setting
+      if ((settings & (1 << 1)) == 0) {
+        display_rise_progress(progress, false);
+      } else {
+        display_rise_progress(progress, true);
+      }
       break;
     case 5:
       Serial.println("Timer expired");
@@ -204,7 +184,35 @@ unsigned long time_to_millis(char * c) {
   return minutes * 60000;
 }
 
-void handle_home_start() {
+void handle_settings_dir(uint8_t button) {
+  uint8_t dir = (button == B_DOWN)? DOWN: UP;
+  if (has_been_pressed(button)) {
+        if (editing_time == 1) {
+          int_setting_change(dir, settings_opts_lut[3], time_cursor_lut[time_index]);
+        } else if (editing_rise_factor == 1){
+          int_setting_change(dir, settings_opts_lut[4], 0);
+        } else if (editing_scan_freq == 1){
+          int_setting_change(dir, settings_opts_lut[5], 0);
+        } else if (settings_index < 7 && dir == DOWN){
+          settings_index += 1;
+        }else if (settings_index != 0 && dir == UP) {
+          settings_index -= 1;
+        }
+        Serial.println(settings, BIN);
+        return;
+  }
+}
+
+void handle_settings_buttons() {
+  handle_settings_dir(B_UP);
+  handle_settings_dir(B_DOWN);
+  if (has_been_pressed(B_START)) {
+    Serial.println(settings, BIN);
+    handle_settings_start();
+  }
+}
+
+void handle_settings_start() {
   Serial.println(settings_index);
   if (settings_index == 2) {
     settings ^= (1 << (7-settings_index));
