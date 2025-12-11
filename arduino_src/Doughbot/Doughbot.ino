@@ -87,6 +87,7 @@ void loop() {
       display_home_screen(th_struct.temp);
       if (has_been_pressed(B_START)) {
         prev_state = state; 
+        get_temp_humid(&th_struct);
         bowl_area = scan_bowl();
         state = 3;
       } else if (has_been_pressed(B_SWAP)) {
