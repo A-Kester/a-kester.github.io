@@ -47,11 +47,11 @@
             </li>
             <li>
                 <h5>Idle</h5>
-                <p>The Idle state is Doughbot's initial state, where it waits for the user to place the desired bowl (empty) inside. From this state, the user can either go to the settings or progress to the Ready state when the bowl has been placed, initiating the baseline scan of the empty bowl. The <b>display_home_screen()</b> function handles the screen display for this state. Button control was not split into another function because it is not very complicated.</p>
+                <p>The Idle state is Doughbot's initial state, where it waits for the user to place the desired bowl (empty) inside. From this state, the user can either go to the settings or progress to the Ready state when the bowl has been placed, initiating the baseline scan of the empty bowl. The <b>display_home_screen()</b> function handles the screen display for this state. Button control was not split into another function because it is not very complicated. From this state, the user can view the ambient room temperature in Celsius. </p>
             </li>
             <li>
                 <h5>Ready</h5>
-                <p>The Ready state is the last state where the user can access the settings. At this point, Doughbot has scanned the empty bowl and is ready to begin the rise process. Like the Idle state, the user can only access the settings menu, or the next state. The <b>display_ready_screen</b> handles the screen display for this state. Button control was not split into another function because it is not very complicated.</p>
+                <p>The Ready state is the last state where the user can access the settings. At this point, Doughbot has scanned the empty bowl and is ready to begin the rise process. Like the Idle state, the user can only access the settings menu, or the next state. The <b>display_ready_screen</b> handles the screen display for this state. Button control was not split into another function because it is not very complicated. From this state, the user can view the ambient room temperature in Celsius.</p>
             </li>
             <li>
                 <h5>Rising</h5>
