@@ -3,7 +3,7 @@
 #define DOWN 0
 #define ASCII_INT_OFFSET 0x30
 
-uint8_t settings = 0b10111010; 
+uint8_t settings = 0b10101110; 
 uint8_t* time_array[] = {0,0,0,0};
 
 uint8_t ascii_to_int(char c);
@@ -20,7 +20,6 @@ void int_setting_change(uint8_t dir, char* str, uint8_t index) {
   // Handle Wrap arounds
   if (*c == '/') *c = '9';
   if (*c == ':') *c = '0';
-
 }
 
 void print_uint8_bin(uint8_t* u, char* str) {

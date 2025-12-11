@@ -1,5 +1,6 @@
 #include <LiquidCrystal.h>
 #include "Helper.h"
+#include "TH_sensor.h"
 
 // 4 chars: 3 digits and a percent sign
 #define ROW_SIZE 20
@@ -49,8 +50,8 @@ char * settings_opts_lut[] = {"ON",  "On", "VOL", r_time, r_factor,  s_freq,  "S
                              "OFF", "OFF","TIME", "NA",   "NA", "NA", "Hide", "Hide", "  "};
 
 void lcd_init();
-void display_home_screen();
-void display_ready_screen();
+void display_home_screen(float temp);
+void display_ready_screen(float temp);
 void display_rise_progress(uint8_t perc, bool show);
 void display_settings(uint8_t sel_index, uint8_t cursor_offset);
 void write_prog_str (uint8_t perc, uint8_t row, uint8_t col);
@@ -66,7 +67,7 @@ void lcd_init() {
   lcd.createChar(5, block_full);
 }
 
-void display_home_screen() {
+void display_home_screen(float temp) {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("DOUGHBOT: IDLE");
@@ -75,10 +76,12 @@ void display_home_screen() {
   lcd.setCursor(0, 2);
   lcd.print("PRESS START TO ZERO");
   lcd.setCursor(0,3);
-  lcd.print("Config: ");
+  lcd.print("Temperature: ");
+  lcd.print(temp);
+  lcd.print(" c");
 }
 
-void display_ready_screen() {
+void display_ready_screen(float temp) {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("DOUGHBOT: READY");
@@ -87,7 +90,9 @@ void display_ready_screen() {
   lcd.setCursor(0, 2);
   lcd.print("START TO BEGIN");
   lcd.setCursor(0,3);
-  lcd.print("Config: ");
+  lcd.print("Temperature: ");
+  lcd.print(temp);
+  lcd.print(" c");
 }
 
 void display_rise_progress(uint8_t perc, bool show) {

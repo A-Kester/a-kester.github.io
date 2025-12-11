@@ -1,17 +1,13 @@
-
 #include <Wire.h>
 #include "Motor.h"
 #include "Display.h"
 #include "Buttons.h"
-#include "TH_sensor.h"
 #include "TOF.h"
 
 #define MAX_TURNS 36
 #define STEP_MM 3
 #define TEN_MIN_MS 600000
 #define ONE_MIN_MS 60000
-// Setp size = 3mm
-
 
 uint8_t rise_fac = 2;
 uint8_t scan_frec = 4;
@@ -32,9 +28,9 @@ uint32_t bowl_area = 846333;
 uint32_t dough_area = 0;
 uint32_t init_dough_area = 0;
 
-
 unsigned long start_time = 0;
 unsigned long target_time = 7200000; // 2 hours in ms
+struct temp_humid th_struct;
 
 double riemannSum();
 double getVolume(int* vals);
@@ -57,25 +53,18 @@ void setup() {
     //init_temp_humid();
   }
  
-  
   buttons_init();
   lcd_init();
   TOF_init();
   init_temp_humid();
-  Serial.println("Getting Measurments");
-  getMeasurements();
+  get_temp_humid(&th_struct);
 }
 
 void loop() {
-  // To read temp/humid
-  //struct temp_humid th_struct;
-  //get_temp_humid(&th_struct);
+  
   unsigned long curr;
   uint8_t scan_freq = 0;
   switch (state) {
-    case 0:
-      // Loading:
-      break;
     case 1: 
       // Settings: 
       display_settings(settings_index, time_cursor_lut[time_index]);
@@ -86,15 +75,20 @@ void loop() {
         lcd.noCursor();
         lcd.noBlink();
       }
-      handle_settings_buttons();
+      handle_settings_dir(B_UP);
+      handle_settings_dir(B_DOWN);
+      if (has_been_pressed(B_START)) {
+        Serial.println(settings, BIN);
+        handle_settings_start();
+      }
       break;
     case 2:
       // Home
-      display_home_screen();
+      display_home_screen(th_struct.temp);
       if (has_been_pressed(B_START)) {
         prev_state = state; 
-        // ********** UNCOMMENT LINE BELLOW *************
-        //bowl_area = scan_bowl();
+        get_temp_humid(&th_struct);
+        bowl_area = scan_bowl();
         state = 3;
       } else if (has_been_pressed(B_SWAP)) {
         // If both pressed, probably wanna 
@@ -103,13 +97,10 @@ void loop() {
       }
       break;
     case 3:
-      display_ready_screen();
+      display_ready_screen(th_struct.temp);
       if (has_been_pressed(B_START)) {
         prev_state = state;
-        // ********** UNCOMMENT LINE BELLOW *************
         init_dough_area = bowl_area - scan_bowl();
-        //init_dough_area = bowl_area - 838620;
-        // ********** REMOVE LINE ABOVE  *************
         progress = 0;
         start_time = millis();
         state = 4;
@@ -126,7 +117,7 @@ void loop() {
       if ((settings & (1 << 5)) != 0) {
         // Using volume rise
         scan_freq = ascii_to_int(*s_freq);
-        //if ((curr - start_time) >= (ONE_MIN_MS * scan_freq) ) {
+        if ((curr - start_time) >= (TEN_MIN_MS * scan_freq) ) {
           dough_area = bowl_area - scan_bowl();
           //dough_area = bowl_area - 700388;
           progress = (dough_area* 10) / (2 * init_dough_area);
@@ -134,7 +125,7 @@ void loop() {
           if (progress >= 100) {
             state = 2;
           }
-        //}
+        }
       } else {
         //Serial.print("checking time: "); Serial.print(curr - start_time); Serial.print(" / "); Serial.println(target_time);
         progress = ((curr - start_time) * 10)/target_time;
@@ -203,15 +194,6 @@ void handle_settings_dir(uint8_t button) {
   }
 }
 
-void handle_settings_buttons() {
-  handle_settings_dir(B_UP);
-  handle_settings_dir(B_DOWN);
-  if (has_been_pressed(B_START)) {
-    Serial.println(settings, BIN);
-    handle_settings_start();
-  }
-}
-
 void handle_settings_start() {
   Serial.println(settings_index);
   if (settings_index == 2) {
@@ -272,4 +254,3 @@ void unwind_motor() {
   }
   myMotor->release();
 }
-
